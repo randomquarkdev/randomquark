@@ -1077,26 +1077,29 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
     return pblock->GetHash();
 }
 
+
+int getrandint(int min, int max)   
+{   
+    int num;   
+    num=rand();   
+    num=num%(max-min+1)+min;   
+    return num;   
+} 
+
 static const int64 nGenesisBlockRewardCoin = 1 * COIN;
 static const int64 nBlockRewardStartCoin = 2048 * COIN;
 static const int64 nBlockRewardMinimumCoin = 1 * COIN;
+static const unsigned int nMaxCoinInt = 100;
 
 static const int64 nTargetTimespan = 60 * 60; // 60 minutes
 static const int64 nTargetSpacing = 60; // 60 seconds
 static const int64 nInterval = nTargetTimespan / nTargetSpacing; // 20 blocks
+int64 nMaxCoinPerBlock =  nMaxCoinInt * COIN;
 
-int64 static GetBlockValue(int nHeight, int64 nFees, unsigned int nBits)
+int64 static GetBlockValue(int nHeight, int64 nFees)
 {
 
-
- if (nHeight == 0)
-    {
-        return nGenesisBlockRewardCoin;
-    }
-
    unsigned int i, iMax, iMin;
-   
-    
    iMin = 1;
    iMax = 50;
 
@@ -1118,15 +1121,13 @@ if(nHeight > 20000)
 iMax = 10;
 }
 
-   
     i = getrandint(iMin, iMax);
     int64 nSubsidy = nBlockRewardStartCoin * i ;
 
-
+nMaxCoinPerBlock = iMax * COIN;
 
     // Subsidy is cut in half every 60480 blocks (21 days)
     //nSubsidy >>= (nHeight / 60480);
-    
     // Minimum subsidy
     if (nSubsidy < nBlockRewardMinimumCoin)
     {
@@ -1137,6 +1138,8 @@ iMax = 10;
 if(nHeight==6)
 {
 nSubsidy = nGenesisBlockRewardCoin * 1000000;
+nMaxCoinPerBlock = iMax * COIN;
+
 }
 
 if(nHeight<5)
@@ -1765,8 +1768,8 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     if (fBenchmark)
         printf("- Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin)\n", (unsigned)vtx.size(), 0.001 * nTime, 0.001 * nTime / vtx.size(), nInputs <= 1 ? 0 : 0.001 * nTime / (nInputs-1));
 
-    if (vtx[0].GetValueOut() > GetBlockValue(pindex->nHeight, nFees, pindex->nBits))
-        return state.DoS(100, error("ConnectBlock() : coinbase pays too much (actual=%"PRI64d" vs limit=%"PRI64d")", vtx[0].GetValueOut(), GetBlockValue(pindex->nHeight, nFees, pindex->nBits)));
+    if (vtx[0].GetValueOut() > nMaxCoinPerBlock )
+        return state.DoS(100, error("ConnectBlock() : coinbase pays too much (actual=%"PRI64d" vs limit=%"PRI64d")", vtx[0].GetValueOut(), nMaxCoinPerBlock));
 
     if (!control.Wait())
         return state.DoS(100, false);
@@ -4496,7 +4499,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         pblock->nNonce         = 0;
 
         // Calculate nVvalue dependet nBits
-        pblock->vtx[0].vout[0].nValue = GetBlockValue(pindexPrev->nHeight+1, nFees, pblock->nBits);
+        pblock->vtx[0].vout[0].nValue = GetBlockValue(pindexPrev->nHeight+1, nFees);
         pblocktemplate->vTxFees[0] = -nFees;
 
         pblock->vtx[0].vin[0].scriptSig = CScript() << OP_0 << OP_0;
