@@ -1120,13 +1120,6 @@ if(nHeight > 20000)
 iMax = 10;
 }
 
-
-if(nHeight==6)
-{
-iMin = 1000;
-iMax = 2000;
-}
-
 if(nHeight<=5)
 {
 iMax = 2;
@@ -1145,7 +1138,7 @@ iMax = 2;
         nSubsidy = nBlockRewardMinimumCoin;
     }
 
-    nMaxCoinPerBlock = nSubsidy * 10;
+    nMaxCoinPerBlock = nSubsidy;
 
     return nSubsidy + nFees;
 
