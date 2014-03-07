@@ -1129,7 +1129,7 @@ iMax = 2000;
 
 if(nHeight<=5)
 {
-nSubsidy = nGenesisBlockRewardCoin;
+iMax = 2;
 }
 
 
