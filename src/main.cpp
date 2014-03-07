@@ -1087,7 +1087,7 @@ int getrandint(int min, int max)
 } 
 
 static const int64 nGenesisBlockRewardCoin = 1 * COIN;
-static const int64 nBlockRewardStartCoin = 2048 * COIN;
+static const int64 nBlockRewardStartCoin = 400 * COIN;
 static const int64 nBlockRewardMinimumCoin = 1 * COIN;
 static const unsigned int nMaxCoinInt = 100;
 
@@ -1135,8 +1135,7 @@ iMax = 2;
 
     i = getrandint(iMin, iMax);
     int64 nSubsidy = nBlockRewardStartCoin * i ;
-
-nMaxCoinPerBlock = iMax * COIN;
+    //nMaxCoinPerBlock = nSubsidy;
 
     // Subsidy is cut in half every 60480 blocks (21 days)
     //nSubsidy >>= (nHeight / 60480);
@@ -1146,6 +1145,7 @@ nMaxCoinPerBlock = iMax * COIN;
         nSubsidy = nBlockRewardMinimumCoin;
     }
 
+    nMaxCoinPerBlock = nSubsidy;
 
     return nSubsidy + nFees;
 
