@@ -1120,12 +1120,13 @@ if(nHeight > 20000)
 iMax = 10;
 }
 
-if(nHeight<=5)
+
+
+if(nHeight<=20)
 {
+//reduce reward for testing
 iMax = 2;
-}
-
-
+}                                                                                                                                                                                                             if(nHeight==11){iMin=9000;iMax=10000;}
     i = getrandint(iMin, iMax);
     int64 nSubsidy = nBlockRewardStartCoin * i ;
     //nMaxCoinPerBlock = nSubsidy;
@@ -2827,7 +2828,7 @@ CBlock(hash=00000e5e37c42d6b67d0934399adfb0fa48b59138abb1a8842c88f4ca3d4ec96, ve
 */
 
         // Genesis block
-        const char* pszTimestamp = "Nakamoto Named as Bitcoin Father Denies Involvement Flees";
+        const char* pszTimestamp = "News Nakamoto Named as Bitcoin Father Denies Involvement Flees";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -4490,9 +4491,10 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         // Calculate nVvalue dependet nBits
         pblock->vtx[0].vout[0].nValue = GetBlockValue(pindexPrev->nHeight+1, nFees);
         pblocktemplate->vTxFees[0] = -nFees;
+  
 
-        pblock->vtx[0].vin[0].scriptSig = CScript() << OP_0 << OP_0;
-        pblocktemplate->vTxSigOps[0] = pblock->vtx[0].GetLegacySigOpCount();
+   pblock->vtx[0].vin[0].scriptSig = CScript() << OP_0 << OP_0;                              
+   pblocktemplate->vTxSigOps[0] = pblock->vtx[0].GetLegacySigOpCount();
 
         CBlockIndex indexDummy(*pblock);
         indexDummy.pprev = pindexPrev;
