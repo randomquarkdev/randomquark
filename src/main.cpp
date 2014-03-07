@@ -1138,18 +1138,13 @@ nMaxCoinPerBlock = iMax * COIN;
 if(nHeight==6)
 {
 nSubsidy = nGenesisBlockRewardCoin * 1000000;
-nMaxCoinPerBlock = iMax * COIN;
-
+nMaxCoinPerBlock = nSubsidy;
 }
 
 if(nHeight<5)
 {
 nSubsidy = nGenesisBlockRewardCoin;
 }
-
-
-
-
 
     return nSubsidy + nFees;
 
