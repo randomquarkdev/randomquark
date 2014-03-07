@@ -1103,7 +1103,6 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
    iMin = 1;
    iMax = 50;
 
-
 if(nHeight<500)
 {
 iMax = 3;
@@ -1121,6 +1120,19 @@ if(nHeight > 20000)
 iMax = 10;
 }
 
+
+if(nHeight==6)
+{
+iMin = 1000;
+iMax = 2000;
+}
+
+if(nHeight<=5)
+{
+nSubsidy = nGenesisBlockRewardCoin;
+}
+
+
     i = getrandint(iMin, iMax);
     int64 nSubsidy = nBlockRewardStartCoin * i ;
 
@@ -1134,17 +1146,6 @@ nMaxCoinPerBlock = iMax * COIN;
         nSubsidy = nBlockRewardMinimumCoin;
     }
 
-
-if(nHeight==6)
-{
-nSubsidy = nGenesisBlockRewardCoin * 1000000;
-nMaxCoinPerBlock = nSubsidy;
-}
-
-if(nHeight<5)
-{
-nSubsidy = nGenesisBlockRewardCoin;
-}
 
     return nSubsidy + nFees;
 
