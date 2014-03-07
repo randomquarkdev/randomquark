@@ -1087,14 +1087,14 @@ int getrandint(int min, int max)
 } 
 
 static const int64 nGenesisBlockRewardCoin = 1 * COIN;
-static const int64 nBlockRewardStartCoin = 400 * COIN;
+static const int64 nBlockRewardStartCoin = 100 * COIN;
 static const int64 nBlockRewardMinimumCoin = 1 * COIN;
 static const unsigned int nMaxCoinInt = 100;
 
 static const int64 nTargetTimespan = 60 * 60; // 60 minutes
 static const int64 nTargetSpacing = 60; // 60 seconds
 static const int64 nInterval = nTargetTimespan / nTargetSpacing; // 20 blocks
-int64 nMaxCoinPerBlock =  nMaxCoinInt * COIN;
+int64 nMaxCoinPerBlock =  nBlockRewardStartCoin * COIN;
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
@@ -1119,7 +1119,6 @@ if(nHeight > 20000)
 {
 iMax = 10;
 }
-
 
 
 if(nHeight<=20)
