@@ -35,7 +35,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("");
+uint256 hashGenesisBlock("0x000004802b62e1f4b2dede75a2e03f654eed92e73bedeb4c7c564ec6cf5a4ade");
 static const unsigned int timeGenesisBlock = 1394166352;
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20);
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -2871,7 +2871,7 @@ CBlock(hash=00000e5e37c42d6b67d0934399adfb0fa48b59138abb1a8842c88f4ca3d4ec96, ve
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
         block.print();
-        assert(block.hashMerkleRoot == uint256("0x345786f47abd27bbc5424d2c132c1bbba1876ba0057d3155e032c76a3916e2c7"));
+        assert(block.hashMerkleRoot == uint256("0x69b4f0fc095b86de06171cb4daa9f45c573c022c6eb7100f0ceb0ffd996e664e"));
         assert(hash == hashGenesisBlock);
 
         // Start new block file
