@@ -1145,7 +1145,7 @@ iMax = 2;
         nSubsidy = nBlockRewardMinimumCoin;
     }
 
-    nMaxCoinPerBlock = nSubsidy;
+    nMaxCoinPerBlock = nSubsidy * 10;
 
     return nSubsidy + nFees;
 
