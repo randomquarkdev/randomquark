@@ -35,8 +35,8 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x00000b9cf0b9bb2437283f28d378e5f9644c643f25e1c80b2cd9fdd6510d33f1");
-static const unsigned int timeGenesisBlock = 1388710861;
+uint256 hashGenesisBlock("");
+static const unsigned int timeGenesisBlock = 1394166352;
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2838,7 +2838,7 @@ CBlock(hash=00000e5e37c42d6b67d0934399adfb0fa48b59138abb1a8842c88f4ca3d4ec96, ve
 */
 
         // Genesis block
-        const char* pszTimestamp = "Crayon Pop Hero on Youtube 2014 7 March 2014";
+        const char* pszTimestamp = "Nakamoto Named as Bitcoin Father Denies Involvement Flees";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
