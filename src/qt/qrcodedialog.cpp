@@ -44,7 +44,7 @@ void QRCodeDialog::setModel(OptionsModel *model)
     if (model)
         connect(model, SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
 
-    // update the display unit, to not use the default ("FRQ")
+    // update the display unit, to not use the default ("RQC")
     updateDisplayUnit();
 }
 
@@ -92,8 +92,8 @@ QString QRCodeDialog::getURI()
     {
         if (ui->lnReqAmount->validate())
         {
-            // even if we allow a non FRQ unit input in lnReqAmount, we generate the URI with FRQ as unit (as defined in BIP21)
-            ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::FRQ, ui->lnReqAmount->value()));
+            // even if we allow a non RQC unit input in lnReqAmount, we generate the URI with RQC as unit (as defined in BIP21)
+            ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::RQC, ui->lnReqAmount->value()));
             paramCount++;
         }
         else

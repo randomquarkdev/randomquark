@@ -105,7 +105,7 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!BitcoinUnits::parse(BitcoinUnits::FRQ, i->second, &rv.amount))
+                if(!BitcoinUnits::parse(BitcoinUnits::RQC, i->second, &rv.amount))
                 {
                     return false;
                 }
