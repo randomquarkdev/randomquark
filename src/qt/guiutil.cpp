@@ -129,9 +129,9 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
     //
     //    Cannot handle this later, because fairquark:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("fairquark://"))
+    if(uri.startsWith("randomquark://"))
     {
-        uri.replace(0, 10, "fairquark:");
+        uri.replace(0, 10, "randomquark:");
     }
     QUrl uriInstance(uri);
     return parseBitcoinURI(uriInstance, out);
@@ -277,7 +277,7 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
 #ifdef WIN32
 boost::filesystem::path static StartupShortcutPath()
 {
-    return GetSpecialFolderPath(CSIDL_STARTUP) / "FairQuark.lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / "RandomQuark.lnk";
 }
 
 bool GetStartOnSystemStartup()
@@ -359,7 +359,7 @@ boost::filesystem::path static GetAutostartDir()
 
 boost::filesystem::path static GetAutostartFilePath()
 {
-    return GetAutostartDir() / "fairquark.desktop";
+    return GetAutostartDir() / "randomquark.desktop";
 }
 
 bool GetStartOnSystemStartup()
@@ -400,7 +400,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         // Write a fairquark.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
-        optionFile << "Name=FairQuark\n";
+        optionFile << "Name=RandomQuark\n";
         optionFile << "Exec=" << pszExePath << " -min\n";
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -421,10 +421,10 @@ bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
 HelpMessageBox::HelpMessageBox(QWidget *parent) :
     QMessageBox(parent)
 {
-    header = tr("FairQuark-Qt") + " " + tr("version") + " " +
+    header = tr("RandomQuark-Qt") + " " + tr("version") + " " +
         QString::fromStdString(FormatFullVersion()) + "\n\n" +
         tr("Usage:") + "\n" +
-        "  fairquark-qt [" + tr("command-line options") + "]                     " + "\n";
+        "  randomquark-qt [" + tr("command-line options") + "]                     " + "\n";
 
     coreOptions = QString::fromStdString(HelpMessage());
 
@@ -433,7 +433,7 @@ HelpMessageBox::HelpMessageBox(QWidget *parent) :
         "  -min                   " + tr("Start minimized") + "\n" +
         "  -splash                " + tr("Show splash screen on startup (default: 1)") + "\n";
 
-    setWindowTitle(tr("FairQuark-Qt"));
+    setWindowTitle(tr("RandomQuark-Qt"));
     setTextFormat(Qt::PlainText);
     // setMinimumWidth is ignored for QMessageBox so put in non-breaking spaces to make it wider.
     setText(header + QString(QChar(0x2003)).repeated(50));
